@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Гостевая книга</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <% if (session.error) { %>
+    <section class="error">
+        <p><%=session.error%></p>
+        <% session.error = undefined %>
+    </section>
+    <% } %>
+    <section class="messages">
+    <% for(let i = 0; i < messages.length; i++) { %>
+        <div class="message">
+            <strong class="name">
+                <%= messages[i].name %>
+            </strong><br>
+            <p class="content">
+            <%=messages[i].content %>
+            </p>
+        </div>
+    <% } %>
+    </section>
+    <form method="POST" action="/message/create">
+        <label>
+            Имя:
+            <input name="name" type="text">
+        </label><br>
+        <label>
+            Сообщение:<br>
+            <textarea name="content" cols="100" rows="10"></textarea>
+        </label><br>
+        <input type="submit" value="Отправить">
+    </form>
+</body>
+</html>
